@@ -1,10 +1,3 @@
-/****************************************
-* Title: Address Book Management        *
-* Author: Ammar Ahmed                   *
-* IDE: Dev C++ 5.11                     *
-* Dated: March 10,2017                  *
-* Website: www.cppbeginner.com          *
-*****************************************/
 #include <iostream>
 #include<conio.h>
 #include <iomanip>
