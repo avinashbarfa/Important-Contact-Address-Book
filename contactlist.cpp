@@ -1,5 +1,8 @@
 #include<iostream>
 #include<conio.h>
+#include<stdlib.h>
+#include<dos.h>
+#include<windows.h>
 using namespace std;
 class ContactList;
 class node
@@ -8,32 +11,26 @@ class node
 	long long contactno;
 	node *next;
 	public :
-	node(string s,long long num)
+	node(string s,long num)
 	{
 		name = s;
 		contactno = num;
 		next = NULL;
 	}
 	friend class ContactList;
-
 };
-
 class ContactList
 {
 	node *start;
 	public :
-	string areaName;
-
 	ContactList()
 	{
-		areaName = "";
 		start = NULL;
 	}
 	void create();
 	void insert();
-	void search();
 	void display();
-	friend class listgraph;
+	void sort();
 };
 
 void ContactList::create()
@@ -41,14 +38,14 @@ void ContactList::create()
 	string name;
 	long long num;
 	int ch=1;
-	node *temp;	
+	node *temp;
 	while(ch==1)
 	{
 		
 	
-		cout<<"\nEnter the  name of organization : ";
+		cout<<"\nName of Organization : ";
 		cin>>name;
-		cout<<"\nEnter Contact Number :";
+		cout<<"\nContact Number :";
 		cin>>num;
 		node *newnode = new node(name,num);	
 		if(start == NULL)
@@ -58,14 +55,15 @@ void ContactList::create()
 			temp -> next = newnode;
 			temp = temp -> next ;
 		} 
-		cout<<"Enter 1 to add another contact in the list --------- Enter any other number to exit"<<endl;
+		cout<<"\nEnter 1 to add another contact in the list --------- Enter any other number to exit"<<endl;
 		cin>>ch;
 	}
 }
-void ContactList :: insert()
+void ContactList::insert()
 {
+	system("CLS");
 	string name;
-	long long num;
+	long num;
 	cout<<"Enter name of the organization : "<<endl;
 	cin>>name;
 	cout<<"Enter contact number : "<<endl;
@@ -75,103 +73,86 @@ void ContactList :: insert()
 	for(temp=start;temp->next!=NULL;temp=temp->next);
 	temp->next = newptr;
 }
-void ContactList :: search()
-{
-	string search_name;
-	int flag=0;
-	cout<<"Enter name of the organization to be searched : "<<endl;
-	cin>>search_name;
-	node *temp;
-	temp = start;
-	while(temp!=NULL)
-	{
-		if(temp->name==search_name)
-		{
-			cout<<"Contact number of "<<temp->name<<" is : "<<temp->contactno;
-			int flag=1;
+void ContactList::sort() {
+	node *temp = start;
+	node *temp2  = new node(name,num);
+	while(temp!=null) {
+		if(1 == (strcmp(temp->node.s, temp->next -> node.s))) {
+			
+			strcpy (temp2 -> node(s,num) , temp -> node(s,num));
+			strcpy (temp -> node(s,num) , temp->next -> node(s,num));
+			strcpy (temp->next -> node(s,num) , temp2 -> node(s,num));
 		}
-		temp = temp->next;
-	}
-	if(flag==0)
-	{
-		cout<<"Sorry, number not found"<<endl;
+		temp= temp->next;
 	}
 }
-void ContactList :: display()
+void ContactList::display()
 {
-
+	system("CLS");
 	node *temp = start;
+	cout<<"-----------------------------------------------------------------------------------------------------------------------"<<endl<<endl;
+	cout<<"\tOrganization Name \t\t\t\t Contact Number"<<endl;
+	cout<<"-----------------------------------------------------------------------------------------------------------------------"<<endl<<endl;
 	while(temp!=NULL)
 	{
-		cout<<"Name of the organization : "<<temp->name<<endl;
-		cout<<"Contact number : "<<temp->contactno<<endl;
+		cout<<"\t\t"<<temp->name;
+		cout<<"\t\t\t\t"<<temp->contactno<<endl;
 		temp=temp->next;
 	}
 }
 
+void splashscreen() {
+	
+	//gotoxy(20,40);
+	cout<<"----  EMERGENCY ADDRESS BOOK  ----"<<endl;
+	Sleep(1000);
+	
+}
 
+void horiline(int size) {
+	for(int i=0;i<size;i++) {
+		cout<<"-";
+	}
+	cout<<endl;
+}
 main()
 {
-	ContactList areas[10];
-	int ch,n;
-	string name;
-							
-	cout<<"How many areas do you want to enter?"<<endl;
-	cin>>n;
-	for(int i=0;i<n;i++)
+	ContactList baner,pashan;
+	int choice = 1;
+	int ch;
+	splashscreen();
+	while(1)
 	{
-			int choice = 1;
-
-		cout<<"Enter name of the area : "<<endl;
-		cin>>areas[i].areaName;
-		cout<<areas[i].areaName;
-		while(choice==1)
+		system("CLS");
+		cout<<"1. To Create A New Contact List."<<endl;
+		cout<<"2. To Add New Contact In The List."<<endl;
+		cout<<"3. To Display The Contact List."<<endl;
+		cout<<"   Exit"<<endl;
+		cout<<"\n";
+		cout<<"Enter Your Choice : ";
+		cin>>ch;
+		switch(ch)
 		{
-			cout<<"Enter 1 to create a new list : "<<endl;
-			cout<<"Enter 2 to insert information in the list : "<<endl;
-			cout<<"Enter 3 to search the list : "<<endl;
-			cout<<"Enter 4 to display the list : "<<endl;
-			cin>>ch;
-			switch(ch)
-			{
-				case 1 : 	areas[i].create();
-							break;
-				case 2 :    cout<<"Enter name of the list in which you want to insert : "<<endl;
-							cin>>name;
-							for(int j=0;j<n;j++)
-							{
-								if(name==areas[j].areaName)
-								areas[j].insert();
-							}
-							break;
-				case 3 :    cout<<"Enter name of the list in which you want to search : "<<endl;
-							cin>>name;
-							for(int j=0;j<n;j++)
-							{
-								if(name==areas[j].areaName)
-								areas[j].search();
-							}
-							break;
-				case 4 :	cout<<"Enter name of the list in which you want to display : "<<endl;
-							cin>>name;
-							for(int j=0;j<n;j++)
-							{
-								if(name==areas[j].areaName)
-								areas[j].display();
-							}
-							break;
-						
-				default :   cout<<"Enter valid choice ";
-							break;
-		
-			}
-			cout<<"Enter 1 to go back to main menu and 2 to terminate the program : ";
-			cin>>choice;
-		
-		}			
-	}
+			case 1 : 	baner.create();
+						break;
+			case 2 :    baner.insert();
+						break;
+						baner.sort();
+			case 3 :    baner.display();
+						cout<<endl;
+						horiline(120);
+						cout<<"Enter Any Key To Return Back : ";
+						char o;
+						cin>>o;
+						break;
+			
+			case 4:     exit(0);
+			
+			default :   cout<<"Enter valid choice ";
+						break;
 	
-
+		}
+	}
 	
 	getch();
 }
