@@ -58,13 +58,70 @@ void horiline(int size) {
 }	
 	
 class ContactList;
+
+bool check(string a)
+{
+	int i=0;
+	while(a[i]!=0)
+	{
+		if(a[i]>=48 && a[i]<=57)
+		{
+			return false;
+		}
+		else
+		{
+			i++;
+		}
+	}
+	return true;
+}
+
+bool check_alphabet(string a)
+{
+	int i=0;
+	while(a[i]!=0)
+	{
+		if(a[i]>=65 && a[i]<=122)
+		{
+			return false;
+		}
+		else
+		{
+			i++;
+		}
+	}
+	return true;
+}
+
+
+void gotoxy(int x, int y)
+	{
+		COORD coord;
+		coord.X = x;
+		coord.Y = y;
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+	}	
+
+void horiline(int size) {
+	for(int i=0;i<size;i++) {
+		cout<<"-";
+	}
+	cout<<endl;
+}	
+	
+
+
 class node
 {
 	string name;
-	long long contactno;
+	string contactno;
 	node *next;
 	public :
+<<<<<<< HEAD
+	node(string s,string num)
+=======
 	node(string s,long num)
+>>>>>>> origin/master
 	{
 		name = s;
 		contactno = num;
@@ -90,12 +147,28 @@ class ContactList
 void ContactList::create()
 {
 	string name;
-	long long num;
+	string num;
 	int ch=1;
 	node *temp;
 	while(ch==1)
 	{
 		system("CLS");
+<<<<<<< HEAD
+		gotoxy(20,3);
+		cout<<"Name of Organization : ";
+		gotoxy(43,3);
+		cin>>name;
+		while(check(name)==false)
+			{
+				gotoxy(43,3);
+				cout<<"                                  ";
+				gotoxy(43,3);
+				cin>>name;
+			}
+		gotoxy(20,5);
+		cout<<"Contact Number :";
+		gotoxy(43,5);
+=======
 		cout<<"\nName of Organization : ";
 		cin>>name;
 		while(check(name)==false)
@@ -106,7 +179,15 @@ void ContactList::create()
 			cin>>name;
 		}
 		cout<<"\nContact Number :";
+>>>>>>> origin/master
 		cin>>num;
+		while(check_alphabet(num) == false)
+			{
+				gotoxy(43,5);
+				cout<<"                              ";
+				gotoxy(43,5);
+				cin>>num;
+			}
 		node *newnode = new node(name,num);	
 		if(start == NULL)
 			start = temp = newnode;
@@ -123,7 +204,11 @@ void ContactList::insert()
 {
 	system("CLS");
 	string name;
+<<<<<<< HEAD
+	string num;
+=======
 	long num;
+>>>>>>> origin/master
 	cout<<"Enter name of the organization : "<<endl;
 	cin>>name;
 	cout<<"Enter contact number : "<<endl;
@@ -175,9 +260,15 @@ void ContactList::display()
 {
 	system("CLS");
 	node *temp = start;
+<<<<<<< HEAD
+	horiline(120);
+	cout<<"\tOrganization Name \t\t\t\t Contact Number"<<endl;
+	horiline(120);
+=======
 	horiline(125);
 	cout<<"\tOrganization Name \t\t\t\t Contact Number"<<endl;
 	horiline(125);
+>>>>>>> origin/master
 	while(temp!=NULL)
 	{
 		cout<<"\t\t"<<temp->name;
@@ -189,6 +280,17 @@ void ContactList::display()
 void splashscreen() {
 	
 	system("CLS");
+<<<<<<< HEAD
+	gotoxy(5,7);
+	horiline(112);
+	cout<<endl;
+	gotoxy(40,10);
+	cout<<"----  EMERGENCY ADDRESS BOOK  ----"<<endl;
+	cout<<endl;
+	gotoxy(5,13);
+	horiline(112);
+	Sleep(0000);
+=======
 	horiline(125);
 	cout<<endl;
 	gotoxy(20,20);
@@ -196,6 +298,7 @@ void splashscreen() {
 	cout<<endl;
 	horiline(125);
 	Sleep(1000);
+>>>>>>> origin/master
 }
 
 main()
@@ -222,7 +325,11 @@ main()
 		gotoxy(16,26);
 		cout<<"Enter Your Choice : ";
 		gotoxy(12,28);
+<<<<<<< HEAD
+		horiline(100);
+=======
 		horiline(124);
+>>>>>>> origin/master
 		gotoxy(36,26);
 		cin>>ch;
 		cout<<endl;
